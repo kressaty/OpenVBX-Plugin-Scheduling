@@ -1,0 +1,76 @@
+/* Scheduling Applet */
+
+.scheduling .options-table td {
+	padding: 10px 5px !important;
+	vertical-align: middle !important;
+}
+
+.scheduling input.keypress {
+	font-weight: bold;
+	text-align: center;
+}
+
+.scheduling .options-table .action {
+	float: left;
+	margin-right: 10px;
+}
+
+.scheduling .more-settings {
+	padding-bottom: 10px;
+	background-color: #EEE;
+	border: 1px solid #DDD;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+	overflow: auto;
+}
+
+.scheduling .more-settings h3 {
+	font-size: 22px;
+	margin: 10px 0 0 15px
+}
+
+.scheduling .more-settings .setting-desc {
+	margin: 15px 0 0 15px;
+}
+
+.scheduling .invalid-option {
+	margin: 10px 10px 0 10px;
+	padding: 10px;
+	background-color: #FFF;
+	border: 1px solid #DDD;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+.scheduling .repeat-menu,
+.scheduling .redirect-menu {
+	float: left;
+	width: 240px;
+	height: 110px;
+	margin: 10px 0 0 10px;
+	padding: 10px;
+	background-color: #FFF;
+	border: 1px solid #DDD;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+.scheduling .enable-repeat,
+.scheduling .enable-redirect {
+	margin-bottom: 10px;
+}
+
+.scheduling .repeat-count label {
+	margin: 10px 0 0 5px !important;
+}
+
+.large{
+	font-size: 16px;
+	font-weight: bold;
+	display: inline!important;
+	margin-right: 20px;
+}
+.scheduling select{
+	clear: none!important;
+	//display: inline!important;
+}

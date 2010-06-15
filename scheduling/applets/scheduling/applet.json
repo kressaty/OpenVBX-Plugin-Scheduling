@@ -1,0 +1,5 @@
+{
+    "name" : "Scheduling",
+    "description" : "Allows a different flow option based on the time of day and day of week.",
+    "type" : ["voice", "sms"]
+}
