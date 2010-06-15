@@ -461,7 +461,7 @@ $server_time = mktime($hour, date("i"), date("s"));
 	<h3>More settings</h3>
     <br />
 	<p class="setting-desc">If your time window is not listed above, or if there is a conflict...</p>
-	<div class="invalid-option">
+	<div class="vbx-full-pane invalid-option">
         <?php echo AppletUI::DropZone('fallback'); ?>
 	</div>
 </div>
