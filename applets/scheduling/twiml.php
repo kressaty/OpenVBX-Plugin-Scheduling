@@ -8,7 +8,6 @@ $start = AppletInstance::getValue('timestart[]');
 $finish = AppletInstance::getValue('timefinish[]');
 $ci_timezone = AppletInstance::getValue('timezones');
 
-
 $ci = & get_instance();
 
 $choice_array = array();
@@ -29,9 +28,7 @@ foreach($choices as $a=>$q)
 	$choice_array[$a] = AppletInstance::getDropZoneUrl('choices['.$a.']');
 }
 
-function verify_day($key, $today)
-{
-	
+function verify_day($key, $today) {
 	$sunday = AppletInstance::getValue('sunday[]');
 	$monday = AppletInstance::getValue('monday[]');
 	$tuesday = AppletInstance::getValue('tuesday[]');
@@ -40,101 +37,17 @@ function verify_day($key, $today)
 	$friday = AppletInstance::getValue('friday[]');
 	$saturday = AppletInstance::getValue('saturday[]');
 	
-	switch($today)
-	{
+	$days = array(
+	 0 => (is_array($sunday) && array_key_exists($key, $sunday)) ? $sunday[$key] : $sunday,
+	 1 => (is_array($monday) && array_key_exists($key, $monday)) ? $monday[$key] : $monday,
+	 2 => (is_array($tuesday) && array_key_exists($key, $tuesday)) ? $tuesday[$key] : $tuesday,
+	 3 => (is_array($wednesday) && array_key_exists($key, $wednesday)) ? $wednesday[$key] : $wednesday,
+	 4 => (is_array($thursday) && array_key_exists($key, $thursday)) ? $thursday[$key] : $thursday,
+	 5 => (is_array($friday) && array_key_exists($key, $friday)) ? $friday[$key] : $friday,
+	 6 => (is_array($saturday) && array_key_exists($key, $saturday)) ? $saturday[$key] : $saturday,
+	);
 	
-		case "Sunday":
-		
-			if ($sunday[$key] == "true")
-			{
-				return 1;
-			}
-			else
-			{
-				return 0;
-			}
-			
-			break;
-			
-		case "Monday":
-		
-			if ($monday[$key] == "true")
-			{
-				return 1;
-			}
-			else
-			{
-				return 0;
-			}
-			
-			break;
-			
-		case "Tuesday":
-		
-			if ($tuesday[$key] == "true")
-			{
-				return 1;
-			}
-			else
-			{
-				return 0;
-			}
-			
-			break;
-			
-		case "Wednesday":
-		
-			if ($wednesday[$key] == "true")
-			{
-				return 1;
-			}
-			else
-			{
-				return 0;
-			}
-			
-			break;
-			
-		case "Thursday":
-		
-			if ($thursday[$key] == "true")
-			{
-				return 1;
-			}
-			else
-			{
-				return 0;
-			}
-			
-			break;
-			
-		case "Friday":
-		
-			if ($friday[$key] == "true")
-			{
-				return 1;
-			}
-			else
-			{
-				return 0;
-			}
-			
-			break;
-			
-		case "Saturday":
-		
-			if ($saturday[$key] == "true")
-			{
-				return 1;
-			}
-			else
-			{
-				return 0;
-			}
-			
-			break;
-	}
-
+	return $days[$today];
 }
 
 function verify_time($currentTime, $startTime, $endTime){
@@ -238,7 +151,7 @@ foreach($start as $k=>$b)
 	
 	$server_time_formatted = date("G:i", $server_time);
 	
-	$server_day_formatted = date("l", $server_time);
+	$server_day = date("w", $server_time);
 		
 	$currentTime = $server_time_formatted;
 	
@@ -249,7 +162,7 @@ foreach($start as $k=>$b)
 	
 	//echo $currentTime.' - '.$b.' - '.$finish_time;
 	
-	if(verify_time($currentTime, $b, $finish_time) == 1 AND verify_day($k, $server_day_formatted) == 1) 
+	if(verify_time($currentTime, $b, $finish_time) == 1 AND verify_day($k, $server_day)) 
 	{ 
 		$response->addRedirect($choice_array[$k]);
 		$response->Respond();
@@ -259,7 +172,7 @@ foreach($start as $k=>$b)
 		break;
 	}
 	
-	elseif(verify_time($currentTime, $b, $finish_time) == 0 OR verify_day($k, $server_day_formatted) == 0) 
+	elseif(verify_time($currentTime, $b, $finish_time) == 0 OR !verify_day($k, $server_day)) 
 	{
 		$do_fallback = true;
 		$oops = true;
